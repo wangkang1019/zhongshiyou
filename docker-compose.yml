@@ -1,0 +1,44 @@
+name: zhongshiyou
+
+services:
+  paddleocr-time-service:
+    build:
+      context: .
+      dockerfile: docker/paddleocr/Dockerfile
+      args:
+        PADDLE_BASE_IMAGE: ccr-2vdh3abv-pub.cnc.bj.baidubce.com/paddlepaddle/paddle:3.0.0-gpu-cuda12.6-cudnn9.5-trt10.5
+    image: paddleocr-time-service:local
+    container_name: paddleocr-time-service
+    ports:
+      - "${OCR_HOST_PORT:-8868}:8868"
+    environment:
+      PADDLEOCR_DEVICE: ${PADDLEOCR_DEVICE:-gpu}
+      PADDLEOCR_LANG: ch
+      PADDLE_PDX_MODEL_SOURCE: BOS
+      NVIDIA_VISIBLE_DEVICES: ${NVIDIA_VISIBLE_DEVICES:-all}
+    gpus: all
+    shm_size: ${DOCKER_SHM_SIZE:-1g}
+    volumes:
+      - paddleocr_paddle_cache:/root/.paddle
+      - paddleocr_paddlex_cache:/root/.paddlex
+    restart: unless-stopped
+
+  plate-recognition:
+    build:
+      context: .
+      dockerfile: docker/plate/Dockerfile
+      args:
+        BASE_IMAGE: ${PLATE_BASE_IMAGE:-pytorch/pytorch:2.5.1-cuda12.4-cudnn9-runtime}
+    image: plate-recognition-service:local
+    container_name: plate-recognition-service
+    ports:
+      - "${PLATE_HOST_PORT:-8002}:8002"
+    environment:
+      NVIDIA_VISIBLE_DEVICES: ${NVIDIA_VISIBLE_DEVICES:-all}
+    gpus: all
+    shm_size: ${DOCKER_SHM_SIZE:-1g}
+    restart: unless-stopped
+
+volumes:
+  paddleocr_paddle_cache:
+  paddleocr_paddlex_cache:

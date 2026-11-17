@@ -1,0 +1,29 @@
+# Local configuration and Python environments
+.env
+.env.*
+!.env.example
+.venv/
+venv/
+vendor/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.vscode/
+.codex/
+.agents/
+prepare_video_preview.py
+/*测试.png
+/*测试.jpg
+
+# Local input media and generated results
+*.mp4
+*.avi
+*.mov
+*.mkv
+*.mp3
+*.srt
+*_video_plate_time_results.xlsx
+output/
+results/

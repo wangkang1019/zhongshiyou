@@ -1,0 +1,12 @@
+[submodule "PaddleOCR"]
+	path = PaddleOCR
+	url = https://github.com/PaddlePaddle/PaddleOCR.git
+	branch = main
+	shallow = true
+	ignore = untracked
+[submodule "Chinese_license_plate_detection_recognition"]
+	path = Chinese_license_plate_detection_recognition
+	url = https://github.com/we0091234/Chinese_license_plate_detection_recognition.git
+	branch = main
+	shallow = true
+	ignore = untracked

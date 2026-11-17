@@ -1,0 +1,15 @@
+# torch and torchvision are provided by the pinned PyTorch base image.
+fastapi
+uvicorn[standard]
+python-multipart
+numpy<2
+opencv-python-headless
+Pillow
+PyYAML
+requests
+tqdm
+matplotlib
+pandas
+seaborn
+scipy
+thop
